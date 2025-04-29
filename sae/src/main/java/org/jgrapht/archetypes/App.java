@@ -5,6 +5,11 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.builder.GraphTypeBuilder;
 import org.jgrapht.util.SupplierUtil;
 
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * Hello JGraphT!
  */
@@ -33,9 +38,21 @@ public class App {
 		}
 
 		for (DefaultEdge e : graph.edgeSet()) {
-			System.out.println("edge: " + e);
+			System.out.println("edge: " + graph.getEdgeSource(e));
 		}
 		
+		String res = "";
+		try {
+			Scanner scanner = new Scanner(new File("datamini.txt"));
+	
+			while (scanner.hasNextLine()) {
+				res += scanner.nextLine();
+			}
+	
+			scanner.close();
+			} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			}
 	}
 	
 }
