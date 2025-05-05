@@ -8,12 +8,40 @@ import org.jgrapht.util.SupplierUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
  * Hello JGraphT!
  */
 public class App {
+
+
+	public static List<String> listeAuteur(String line){
+		/*
+		 * @param : la ligne étudier 
+		 * @return : la liste des auteurs du film
+		 * 
+		 */
+
+		List<String> rep = new ArrayList<>(); 
+
+		for (int i =0 ; i<line.length(); i++){
+			if (line.charAt(i) == 'c'&& line.charAt(i+1) == 'a'&& line.charAt(i+2) == 's' && line.charAt(i+3) == 't'  && line.charAt(i+5) == ':'){
+				String acteur = "";
+				for (int j = i; j<line.length();j++){
+					if (line.charAt(j) == ','){
+						rep.add(acteur);
+						acteur = "";
+					} else {
+						acteur += line.charAt(j);
+					}
+				}
+			}	
+		}
+		return rep;
+	}
 	
 	public static void main(String[] args) {
 		
@@ -41,13 +69,17 @@ public class App {
 			System.out.println("edge: " + graph.getEdgeSource(e));
 		}
 		
-		String res = "";
+
 		try {
 			Scanner scanner = new Scanner(new File("datamini.txt"));
 	
+			String res = "";
+
 			while (scanner.hasNextLine()) {
-				res += scanner.nextLine();
+				res = scanner.nextLine();
 			}
+
+			System.out.println(listeAuteur(res));
 	
 			scanner.close();
 			} catch (FileNotFoundException e) {
