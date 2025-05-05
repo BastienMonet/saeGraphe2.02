@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class App {
 
 
-	public static List<String> listeAuteur(String line){
+	public static List<String> listerLesAuteurs(String line){
 		/*
 		 * @param : la ligne étudier 
 		 * @return : la liste des auteurs du film
@@ -27,18 +27,20 @@ public class App {
 
 		List<String> rep = new ArrayList<>(); 
 
-		for (int i =0 ; i<line.length(); i++){
-			if (line.charAt(i) == 'c'&& line.charAt(i+1) == 'a'&& line.charAt(i+2) == 's' && line.charAt(i+3) == 't'  && line.charAt(i+5) == ':'){
-				String acteur = "";
-				for (int j = i; j<line.length();j++){
-					if (line.charAt(j) == ','){
-						rep.add(acteur);
-						acteur = "";
-					} else {
-						acteur += line.charAt(j);
-					}
-				}
-			}	
+		int i=0;
+		while (line.charAt(i) != 'c'|| line.charAt(i+1) != 'a'|| line.charAt(i+2) != 's' || line.charAt(i+3) != 't' || line.charAt(i+5) != ':')
+		{
+			i++;
+		}
+
+		String acteur = "";
+		for (int j = i; j<line.length();j++){
+			if (line.charAt(j) == ','){
+				rep.add(acteur);
+				acteur = "";
+			} else {
+				acteur += line.charAt(j);
+			}
 		}
 		return rep;
 	}
