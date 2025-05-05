@@ -47,6 +47,18 @@ public class App {
 		}
 		return rep;
 	}
+
+	public static List<String> nettoyer(List<String> lst){
+		/*
+		 * @param : la liste de nom à nettoyer
+		 * @return : la liste nettoyer (sans [] ou " supplementaire)
+		 */
+		List<String> cp = new ArrayList<>();
+		for(String s : lst){
+			cp.add(s.replaceAll("[\\[\\]\"]",""));
+		}
+		return cp;
+	}
 	
 	public static void main(String[] args) {
 		
@@ -83,8 +95,7 @@ public class App {
 			while (scanner.hasNextLine()) {
 				res = scanner.nextLine();
 			}
-
-			System.out.println(listerLesAuteurs(res));
+			System.out.println(nettoyer(listerLesAuteurs(res)));
 	
 			scanner.close();
 			} catch (FileNotFoundException e) {
