@@ -34,13 +34,16 @@ public class App {
 		}
 
 		String acteur = "";
-		for (int j = i; j<line.length();j++){
+		int j = i+9;
+		while (line.charAt(j) != 'd'|| line.charAt(j+1) != 'i'|| line.charAt(j+2) != 'r' || line.charAt(j+3) != 'e')
+		{
 			if (line.charAt(j) == ','){
 				rep.add(acteur);
 				acteur = "";
 			} else {
 				acteur += line.charAt(j);
 			}
+			j++;
 		}
 		return rep;
 	}
@@ -81,7 +84,7 @@ public class App {
 				res = scanner.nextLine();
 			}
 
-			System.out.println(listeAuteur(res));
+			System.out.println(listerLesAuteurs(res));
 	
 			scanner.close();
 			} catch (FileNotFoundException e) {
