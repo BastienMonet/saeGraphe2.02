@@ -5,12 +5,18 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.builder.GraphTypeBuilder;
 import org.jgrapht.util.SupplierUtil;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Hello JGraphT!
@@ -18,46 +24,29 @@ import java.util.Scanner;
 public class App {
 
 
-	public static List<String> listerLesAuteurs(String line){
-		/*
-		 * @param : la ligne étudier 
-		 * @return : la liste des auteurs du film
-		 * 
-		 */
-
-		List<String> rep = new ArrayList<>(); 
-
-		int i=0;
-		while (line.charAt(i) != 'c'|| line.charAt(i+1) != 'a'|| line.charAt(i+2) != 's' || line.charAt(i+3) != 't' || line.charAt(i+5) != ':')
-		{
-			i++;
-		}
-
-		String acteur = "";
-		int j = i+9;
-		while (line.charAt(j) != 'd'|| line.charAt(j+1) != 'i'|| line.charAt(j+2) != 'r' || line.charAt(j+3) != 'e')
-		{
-			if (line.charAt(j) == ','){
-				rep.add(acteur);
-				acteur = "";
-			} else {
-				acteur += line.charAt(j);
-			}
-			j++;
-		}
-		return rep;
-	}
-
-	public static List<String> nettoyer(List<String> lst){
+	public static Set<String> nettoyer(List<String> lst){
 		/*
 		 * @param : la liste de nom à nettoyer
 		 * @return : la liste nettoyer (sans [] ou " supplementaire)
 		 */
-		List<String> cp = new ArrayList<>();
+		Set<String> cp = new HashSet<>();
 		for(String s : lst){
 			cp.add(s.replaceAll("[\\[\\]\"]",""));
 		}
 		return cp;
+	}
+
+
+	public static void ajouterAuGraph(Graph<String, DefaultEdge> g, Set<String> set) {
+		for (String v : set) {
+			g.addVertex(v);
+		}
+
+		for (String v1 : set) {
+			for (String v2 : set){
+				g.addEdge(v1, v2);
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -91,11 +80,34 @@ public class App {
 			Scanner scanner = new Scanner(new File("datamini.txt"));
 	
 			String res = "";
+			int cpt = 1;
 
 			while (scanner.hasNextLine()) {
 				res = scanner.nextLine();
+				
+				Gson gson = new Gson();
+
+				// Parse the string into a JsonObject
+				JsonObject jsonObject = gson.fromJson(res, JsonObject.class);
+
+				// Get the array associated with the "key"
+				JsonArray jsonArray = jsonObject.getAsJsonArray("cast");
+
+				List<String> caster = new ArrayList<>(); 
+				
+				for (JsonElement element : jsonArray) {
+                	caster.add(element.getAsString());
+            	}
+
+				cpt++;
+
+				System.out.println(nettoyer(caster));
+				System.out.println(cpt);
+
+				Set<String> castPropre = nettoyer(caster);
+				ajouterAuGraph(graph,castPropre);
 			}
-			System.out.println(nettoyer(listerLesAuteurs(res)));
+			
 	
 			scanner.close();
 			} catch (FileNotFoundException e) {
