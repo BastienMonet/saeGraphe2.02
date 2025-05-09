@@ -75,26 +75,6 @@ public class App {
 		
 		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
-		// graph.addVertex("v0");
-		// graph.addVertex("v1");
-		// graph.addVertex("v2");
-
-		// graph.addEdge("v0", "v1");
-		// graph.addEdge("v1", "v2");
-		// graph.addEdge("v0", "v2");
-
-
-
-
-		for (String v : graph.vertexSet()) {
-			System.out.println("vertex: " + v);
-		}
-
-		for (DefaultEdge e : graph.edgeSet()) {
-			System.out.println("edge: " + graph.getEdgeSource(e));
-		}
-		
-
 		try {
 			Scanner scanner = new Scanner(new File("datamicro.txt"));
 	
@@ -118,10 +98,12 @@ public class App {
                 	caster.add(element.getAsString());
             	}
 
-				cpt++;
 
-				System.out.println(nettoyer(caster));
 				System.out.println(cpt);
+				System.out.println(nettoyer(caster));
+
+				cpt++;
+				
 
 				Set<String> castPropre = nettoyer(caster);
 				ajouterAuGraph(graph,castPropre);
@@ -132,6 +114,13 @@ public class App {
 			} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			}
+
+
+
+		Set<String> res = Fonction.CollaborateursEnCommuns(graph, "a", "b");
+		System.out.println(res);
+
+
 
 		DOTExporter<String, DefaultEdge> exporter = new DOTExporter<String, DefaultEdge>();
 		exporter.setVertexAttributeProvider((x) -> Map.of("label", new DefaultAttribute<>(x, AttributeType.STRING)));
