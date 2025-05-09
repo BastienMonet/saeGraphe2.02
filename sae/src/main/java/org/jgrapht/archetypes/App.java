@@ -2,7 +2,14 @@ package org.jgrapht.archetypes;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultUndirectedGraph;
+import org.jgrapht.graph.SimpleGraph;
 import org.jgrapht.graph.builder.GraphTypeBuilder;
+import org.jgrapht.nio.AttributeType;
+import org.jgrapht.nio.DefaultAttribute;
+import org.jgrapht.nio.csv.CSVFormat;
+import org.jgrapht.nio.csv.CSVImporter;
+import org.jgrapht.nio.dot.DOTExporter;
 import org.jgrapht.util.SupplierUtil;
 
 import com.google.gson.Gson;
@@ -12,9 +19,12 @@ import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -24,6 +34,16 @@ import java.util.Set;
 public class App {
 
 
+	public static Graph<String, DefaultEdge> loadHeroes() {
+		Graph<String, DefaultEdge> graph = new DefaultUndirectedGraph<>(SupplierUtil.createStringSupplier(1),
+				SupplierUtil.DEFAULT_EDGE_SUPPLIER, false);
+		CSVImporter<String, DefaultEdge> importer = new CSVImporter<>(CSVFormat.EDGE_LIST);
+		importer.setVertexFactory(id -> id);
+		importer.importGraph(graph, new File("extrait_marvel.csv"));
+		return graph;
+	}
+
+	
 	public static Set<String> nettoyer(List<String> lst){
 		/*
 		 * @param : la liste de nom à nettoyer
@@ -39,33 +59,32 @@ public class App {
 
 	public static void ajouterAuGraph(Graph<String, DefaultEdge> g, Set<String> set) {
 		for (String v : set) {
-			g.addVertex(v);
+			if (! (g.containsVertex(v)))
+				g.addVertex(v);
 		}
 
 		for (String v1 : set) {
 			for (String v2 : set){
-				g.addEdge(v1, v2);
+				if(! (g.containsEdge(v1, v2) || g.containsEdge(v2, v1) ) && v1 != v2)
+					g.addEdge(v1, v2);
 			}
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
-		Graph<String, DefaultEdge> graph = GraphTypeBuilder
-				.directed()
-				.allowingMultipleEdges(true)
-				.allowingSelfLoops(true)
-				.vertexSupplier(SupplierUtil.createStringSupplier())
-				.edgeSupplier(SupplierUtil.createDefaultEdgeSupplier())
-				.buildGraph();
+		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
-		String v0 = graph.addVertex();
-		String v1 = graph.addVertex();
-		String v2 = graph.addVertex();
+		// graph.addVertex("v0");
+		// graph.addVertex("v1");
+		// graph.addVertex("v2");
 
-		graph.addEdge(v0, v1);
-		graph.addEdge(v1, v2);
-		graph.addEdge(v0, v2);
+		// graph.addEdge("v0", "v1");
+		// graph.addEdge("v1", "v2");
+		// graph.addEdge("v0", "v2");
+
+
+
 
 		for (String v : graph.vertexSet()) {
 			System.out.println("vertex: " + v);
@@ -77,7 +96,7 @@ public class App {
 		
 
 		try {
-			Scanner scanner = new Scanner(new File("datamini.txt"));
+			Scanner scanner = new Scanner(new File("datamicro.txt"));
 	
 			String res = "";
 			int cpt = 1;
@@ -113,6 +132,12 @@ public class App {
 			} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			}
+
+		DOTExporter<String, DefaultEdge> exporter = new DOTExporter<String, DefaultEdge>();
+		exporter.setVertexAttributeProvider((x) -> Map.of("label", new DefaultAttribute<>(x, AttributeType.STRING)));
+		exporter.exportGraph(graph, new FileWriter("graph.dot"));
 	}
+
+		
 	
 }
