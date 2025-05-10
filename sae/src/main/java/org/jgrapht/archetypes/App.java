@@ -117,7 +117,7 @@ public class App {
 
 
 
-		Set<String> res = Fonction.CollaborateursEnCommuns(graph, "a", "b");
+		boolean res = Fonction.EstADistanceK(graph, "a", "f", 1);
 		System.out.println(res);
 
 

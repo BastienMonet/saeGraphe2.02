@@ -1,6 +1,12 @@
 package org.jgrapht.archetypes;
 
+import java.util.ArrayDeque;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.jgrapht.Graph;
@@ -25,10 +31,68 @@ public class Fonction {
 
 
     public static Set<String> CollaborateursEnCommuns(Graph<String, DefaultEdge> g , String acteur1, String acteur2){
+		/*/
+		@param : le graph ; 2 acteurs du graph
+		@return : intersection entre les voisins des 2 acteurs
+		complexite : O(N²)
+		*/
         Set<String> listAct1 = getNeighborsOf(g, acteur1);
 		Set<String> listAct2 = getNeighborsOf(g, acteur2);
         listAct1.retainAll(listAct2);
 		return listAct1;
+	}
+
+
+	public static Set<String> CollaborateursProches(Graph<String, DefaultEdge> g , String acteur, int k){
+		Set<String> prev = new HashSet<>();
+		prev.add(acteur);
+		Set<String> new_ = new HashSet<>();
+		int i = 0;
+		while (i<k) {
+			i++;
+			System.out.println(prev);
+			new_.clear();
+			for (String u : prev){
+				new_.addAll(getNeighborsOf(g, u));
+			}
+			prev = new HashSet<>(new_);
+			
+		}
+		return new_;
+	}
+
+	public static boolean EstADistanceK(Graph<String, DefaultEdge> g , String acteur1, String acteur2, int k){
+		List<String> lst = new ArrayList<>(CollaborateursProches(g, acteur1, k));
+		return lst.contains(acteur2);
+	}
+
+	public static int DistanceEntreActeurs(Graph<String, DefaultEdge> g , String acteur1, String acteur2){
+		
+	}
+
+
+	public static Set<String> BFS(Graph<String, DefaultEdge> g , String acteur){
+		/*
+		 * BFS : parcours en largeur
+		 * complexite : O(N²)
+		 */ 
+		Deque<String> d = new ArrayDeque<>();
+		d.addLast(acteur);
+
+		Set<String> res = new HashSet<>(); 
+
+		while (! (d.isEmpty())){
+			String u = d.removeFirst();
+			res.add(u);
+			System.out.println(d);
+			for (String v : getNeighborsOf(g, u)){
+				if (!(res.contains(v)))
+						d.addLast(v);
+						
+				}
+			}
+			
+		return res;
 	}
     
 }
