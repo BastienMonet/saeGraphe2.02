@@ -117,7 +117,7 @@ public class App {
 
 
 
-		boolean res = Fonction.EstADistanceK(graph, "a", "f", 1);
+		int res = Fonction.DistanceEntreActeurs(graph, "a", "3");
 		System.out.println(res);
 
 

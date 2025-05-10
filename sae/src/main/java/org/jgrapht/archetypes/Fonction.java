@@ -50,7 +50,6 @@ public class Fonction {
 		int i = 0;
 		while (i<k) {
 			i++;
-			System.out.println(prev);
 			new_.clear();
 			for (String u : prev){
 				new_.addAll(getNeighborsOf(g, u));
@@ -61,13 +60,41 @@ public class Fonction {
 		return new_;
 	}
 
+	public static Set<String> CollaborateursProchesRecursif(Graph<String, DefaultEdge> g , Set<String> prev){
+		Set<String> new_ = new HashSet<>();
+		System.out.println(prev);
+		new_.clear();
+		for (String u : prev){
+			new_.addAll(getNeighborsOf(g, u));
+		}	
+		return new_;
+	}
+
+
 	public static boolean EstADistanceK(Graph<String, DefaultEdge> g , String acteur1, String acteur2, int k){
 		List<String> lst = new ArrayList<>(CollaborateursProches(g, acteur1, k));
 		return lst.contains(acteur2);
 	}
 
 	public static int DistanceEntreActeurs(Graph<String, DefaultEdge> g , String acteur1, String acteur2){
-		
+		if (!(g.containsVertex(acteur1)) || !(g.containsVertex(acteur2)))
+			return -1;
+		Set<String> prev = new HashSet<>();
+		prev.add(acteur1);
+		boolean fini = false;
+		int k = 0;
+		while (!(fini)){
+			k++;
+			Set<String> new_ = CollaborateursProchesRecursif(g, prev);
+			if (new_.contains(acteur2)){
+				fini = true;
+			} else if (prev.equals(new_)){
+				return -1;
+			}
+			prev = new HashSet<>(new_);
+
+		}
+		return k;
 	}
 
 
