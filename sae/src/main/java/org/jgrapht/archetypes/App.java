@@ -117,7 +117,7 @@ public class App {
 
 
 
-		int res = Fonction.DistanceEntreActeurs(graph, "a", "3");
+		int res = Fonction.DistanceMax(graph, "e");
 		System.out.println(res);
 
 

@@ -62,7 +62,6 @@ public class Fonction {
 
 	public static Set<String> CollaborateursProchesRecursif(Graph<String, DefaultEdge> g , Set<String> prev){
 		Set<String> new_ = new HashSet<>();
-		System.out.println(prev);
 		new_.clear();
 		for (String u : prev){
 			new_.addAll(getNeighborsOf(g, u));
@@ -77,6 +76,9 @@ public class Fonction {
 	}
 
 	public static int DistanceEntreActeurs(Graph<String, DefaultEdge> g , String acteur1, String acteur2){
+		/*
+		 * complexité : O(N²)
+		 */
 		if (!(g.containsVertex(acteur1)) || !(g.containsVertex(acteur2)))
 			return -1;
 		Set<String> prev = new HashSet<>();
@@ -91,12 +93,52 @@ public class Fonction {
 			} else if (prev.equals(new_)){
 				return -1;
 			}
+			System.out.println(prev);
+			System.out.println(new_);
 			prev = new HashSet<>(new_);
 
 		}
 		return k;
 	}
 
+
+
+	public static Set<String> ActeurPlusEloigne(Graph<String, DefaultEdge> g, String acteur){
+		if (!(g.containsVertex(acteur)))
+			return null;
+		Set<String> memoire = new HashSet<>();
+		Set<String> prev = new HashSet<>();
+		prev.add(acteur);
+		Set<String> new_ = new HashSet<>();
+		while (true){
+			new_ = CollaborateursProchesRecursif(g, prev);
+			if (prev.equals(new_)){
+				prev.removeAll(memoire);
+				return prev;
+			}
+			memoire.addAll(prev);
+			prev = new HashSet<>(new_);
+		}
+	}
+
+
+	public static int DistanceMax(Graph<String, DefaultEdge> g, String acteur){
+		if (!(g.containsVertex(acteur)))
+			return -1;
+		Set<String> prev = new HashSet<>();
+		prev.add(acteur);
+		Set<String> new_ = new HashSet<>();
+		int k = 0;
+		while (true){
+			k++;
+			new_ = CollaborateursProchesRecursif(g, prev);
+			if (prev.equals(new_)){
+				return k;
+			}
+			prev = new HashSet<>(new_);
+		}
+	}
+	
 
 	public static Set<String> BFS(Graph<String, DefaultEdge> g , String acteur){
 		/*
