@@ -128,7 +128,7 @@ public class Fonction {
 		Set<String> prev = new HashSet<>();
 		prev.add(acteur);
 		Set<String> new_ = new HashSet<>();
-		int k = 0;
+		int k = 0; 
 		while (true){
 			k++;
 			new_ = CollaborateursProchesRecursif(g, prev);
@@ -139,6 +139,30 @@ public class Fonction {
 		}
 	}
 	
+	public static Set<String> ActeurAuCentre(Graph<String, DefaultEdge> g){
+		/*
+		 *  ! ne marche que pour un graphe connexe
+		 */
+		Set<String> lesActeurs = g.vertexSet();
+		Integer centralMin = null;
+		Set<String> acteurCentralMin = new HashSet<>();
+		int cpt = 0;
+		for (String cast : lesActeurs){
+			cpt++;
+			System.out.println(cpt);
+			int centralite = DistanceMax(g, cast);
+			if (centralMin == null || centralite < centralMin){
+				centralMin = centralite;
+				acteurCentralMin.clear();
+				acteurCentralMin.add(cast);
+			} else if (centralite == centralMin){
+				acteurCentralMin.add(cast);
+			}
+
+		}  
+		return acteurCentralMin;
+
+	}
 
 	public static Set<String> BFS(Graph<String, DefaultEdge> g , String acteur){
 		/*

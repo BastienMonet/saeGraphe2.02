@@ -76,7 +76,7 @@ public class App {
 		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
 		try {
-			Scanner scanner = new Scanner(new File("datamicro.txt"));
+			Scanner scanner = new Scanner(new File("datamini.txt"));
 	
 			String res = "";
 			int cpt = 1;
@@ -117,8 +117,8 @@ public class App {
 
 
 
-		int res = Fonction.DistanceMax(graph, "e");
-		System.out.println(res);
+		// Set<String> res = Fonction.ActeurAuCentre(graph);
+		// System.out.println(res);
 
 
 
