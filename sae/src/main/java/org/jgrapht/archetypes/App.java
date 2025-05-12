@@ -76,7 +76,7 @@ public class App {
 		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
 		try {
-			Scanner scanner = new Scanner(new File("datamini.txt"));
+			Scanner scanner = new Scanner(new File("datamicro.txt"));
 	
 			String res = "";
 			int cpt = 1;
