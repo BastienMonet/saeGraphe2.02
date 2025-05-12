@@ -2,11 +2,6 @@ package org.jgrapht.archetypes;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 
 import org.jgrapht.Graph;
@@ -16,10 +11,6 @@ import org.jgrapht.graph.builder.GraphTypeBuilder;
 import org.jgrapht.util.SupplierUtil;
 import org.junit.Test;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 /**
  * Unit test for simple App.
@@ -29,48 +20,52 @@ public class AppTest
     /**
      * Rigorous Test :-)
      */
+
+    public static void getGraph(Graph<String, DefaultEdge> graph){
+        graph.addVertex("a");
+        graph.addVertex("b");
+        graph.addVertex("c");
+        graph.addVertex("d");
+        graph.addVertex("e");
+        graph.addVertex("f");
+        graph.addVertex("g");
+        graph.addVertex("h");
+        graph.addVertex("i");
+
+        graph.addEdge("a", "b");
+        graph.addEdge("a", "c");
+        graph.addEdge("b", "c");
+        graph.addEdge("b", "d");
+        graph.addEdge("b", "e");
+        graph.addEdge("d", "e");
+        graph.addEdge("b", "f");
+        graph.addEdge("c", "f");
+        graph.addEdge("g", "h");
+        graph.addEdge("g", "i");
+        graph.addEdge("h", "i");
+        graph.addEdge("d", "f");
+        graph.addEdge("d", "g");
+        graph.addEdge("f", "g");
+    }
+
+
     @Test
-    public void rigorousTest()
+    public void TestNeighbors()
     {
         Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        getGraph(graph);
+
+        Set<String> res1 = Set.of("b", "c");
+        Set<String> res2 = Set.of("a", "d", "c", "e","f");
+        Set<String> res3 = Set.of("h", "g");
+
+        assertEquals(Fonction.getNeighborsOf(graph, "a"),res1);
+        assertEquals(Fonction.getNeighborsOf(graph, "b"),res2);
+        assertEquals(Fonction.getNeighborsOf(graph, "i"),res3);
+
         
-      try {
-        Scanner scanner = new Scanner(new File("datamicro.txt"));
-    
-        String res = "";
-        int cpt = 1;
-
-          while (scanner.hasNextLine()) {
-            res = scanner.nextLine();
-            
-            Gson gson = new Gson();
-
-            // Parse the string into a JsonObject
-            JsonObject jsonObject = gson.fromJson(res, JsonObject.class);
-
-            // Get the array associated with the "key"
-            JsonArray jsonArray = jsonObject.getAsJsonArray("cast");
-
-            List<String> caster = new ArrayList<>(); 
-            
-            for (JsonElement element : jsonArray) {
-                      caster.add(element.getAsString());
-                  }
-
-
-            System.out.println(cpt);
-            System.out.println(App.nettoyer(caster));
-
-            cpt++;
-            
-
-            Set<String> castPropre = App.nettoyer(caster);
-            App.ajouterAuGraph(graph,castPropre);
-          }
-
-      } catch (FileNotFoundException e) {
-			e.printStackTrace();
-			}
+        
+      
 
 
 
