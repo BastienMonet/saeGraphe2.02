@@ -29,6 +29,19 @@ public class Fonction {
 		return neighbors;
 	}
 
+	public static Set<String> getNeighborsNonMemoire(Graph<String, DefaultEdge> g, String u, Set<String> memoire){
+		Set<String> neighbors= new HashSet<>();
+		for(DefaultEdge edge : g.edgesOf(u)){
+			String source = g.getEdgeSource(edge);
+			String target = g.getEdgeTarget(edge);
+			if (!source.equals(u) && !(memoire.contains(source))){ // access direct 
+				neighbors.add(source);
+			} else if (source.equals(u) && !(memoire.contains(target))) {
+				neighbors.add(target);
+			}
+		}
+		return neighbors;
+	}
 
     public static Set<String> CollaborateursEnCommuns(Graph<String, DefaultEdge> g , String acteur1, String acteur2){
 		/*/
@@ -47,12 +60,14 @@ public class Fonction {
 		Set<String> prev = new HashSet<>();
 		prev.add(acteur);
 		Set<String> new_ = new HashSet<>();
+		Set<String> memoire = new HashSet<>();
 		int i = 0;
 		while (i<k) {
 			i++;
 			new_.clear();
 			for (String u : prev){
-				new_.addAll(getNeighborsOf(g, u));
+				memoire.addAll(prev);
+				new_.addAll(getNeighborsNonMemoire(g, u, memoire));
 			}
 			prev = new HashSet<>(new_);
 			

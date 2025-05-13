@@ -76,7 +76,7 @@ public class App {
 		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
 		try {
-			Scanner scanner = new Scanner(new File("datamicro.txt"));
+			Scanner scanner = new Scanner(new File("datamini.txt"));
 	
 			String res = "";
 			int cpt = 1;
@@ -86,10 +86,8 @@ public class App {
 				
 				Gson gson = new Gson();
 
-				// Parse the string into a JsonObject
 				JsonObject jsonObject = gson.fromJson(res, JsonObject.class);
 
-				// Get the array associated with the "key"
 				JsonArray jsonArray = jsonObject.getAsJsonArray("cast");
 
 				List<String> caster = new ArrayList<>(); 
@@ -117,14 +115,14 @@ public class App {
 
 
 
-		// Set<String> res = Fonction.ActeurAuCentre(graph);
-		// System.out.println(res);
+		Set<String> res = Fonction.ActeurAuCentre(graph);
+		System.out.println(res);
 
 
 
-		DOTExporter<String, DefaultEdge> exporter = new DOTExporter<String, DefaultEdge>();
-		exporter.setVertexAttributeProvider((x) -> Map.of("label", new DefaultAttribute<>(x, AttributeType.STRING)));
-		exporter.exportGraph(graph, new FileWriter("graph.dot"));
+		// DOTExporter<String, DefaultEdge> exporter = new DOTExporter<String, DefaultEdge>();
+		// exporter.setVertexAttributeProvider((x) -> Map.of("label", new DefaultAttribute<>(x, AttributeType.STRING)));
+		// exporter.exportGraph(graph, new FileWriter("graph.dot"));
 	}
 
 		

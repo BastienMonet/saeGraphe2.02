@@ -62,16 +62,45 @@ public class AppTest
         assertEquals(Fonction.getNeighborsOf(graph, "a"),res1);
         assertEquals(Fonction.getNeighborsOf(graph, "b"),res2);
         assertEquals(Fonction.getNeighborsOf(graph, "i"),res3);
-
-        
-        
-      
-
-
-
-
-      
-
     }
+
+    @Test
+    public void TesCollaborateurEnCommuns(){
+        Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        getGraph(graph);
+
+        Set<String> res1 = Set.of("c");
+        Set<String> res2 = Set.of("c", "d");
+        Set<String> res3 = Set.of();
+
+        assertEquals(Fonction.CollaborateursEnCommuns(graph, "a", "b"),res1);
+        assertEquals(Fonction.CollaborateursEnCommuns(graph, "b", "f"),res2);
+        assertEquals(Fonction.CollaborateursEnCommuns(graph, "i", "e"),res3);
+    }
+
+    @Test
+    public void CollaborateursProches(){
+        Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        getGraph(graph);
+
+        Set<String> res1 = Set.of("b", "c");
+        Set<String> res2 = Set.of("f", "d");
+        Set<String> res3 = Set.of("h", "i");
+
+        assertEquals(Fonction.CollaborateursProches(graph, "a", 1),res1);
+        assertEquals(Fonction.CollaborateursProches(graph, "i", 2),res2);
+        assertEquals(Fonction.CollaborateursProches(graph, "b", 3),res3);
+    }
+
+    @Test
+    public void TestDistanceEntreActeurs(){
+        Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        getGraph(graph);
+
+        assertEquals(Fonction.DistanceEntreActeurs(graph, "a", "b"),1);
+        assertEquals(Fonction.DistanceEntreActeurs(graph, "a", "d"),2);
+        assertEquals(Fonction.DistanceEntreActeurs(graph, "a", "i"),4);
+    }
+
 
 }
