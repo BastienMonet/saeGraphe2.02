@@ -167,8 +167,10 @@ public class Fonction {
 		while (true){
 			k++;
 			memoire.addAll(prev);
-			new_ = CollaborateursProchesRecursif(g, prev);
-			new_.removeAll(memoire);
+			new_.clear();
+			for (String u : prev){
+				new_.addAll(getNeighborsNonMemoire(g, u, memoire));
+			}	
 			if (prev.equals(new_)){
 				return k;
 			}
