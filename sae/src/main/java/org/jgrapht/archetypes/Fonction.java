@@ -3,11 +3,13 @@ package org.jgrapht.archetypes;
 import java.util.ArrayDeque;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
@@ -183,6 +185,11 @@ public class Fonction {
 		 *  ! ne marche que pour un graphe connexe
 		 */
 		Set<String> lesActeurs = g.vertexSet();
+			// .stream()
+			// .sorted((v1, v2) -> Integer.compare(g.degreeOf(v2), g.degreeOf(v1)))
+			// .collect(Collectors.toList());
+		// Collections.sort(lesActeurs, new ComparatorDegree(g));
+		// System.out.println(lesActeurs.get(0));
 		Integer centralMin = null;
 		Set<String> acteurCentralMin = new HashSet<>();
 		int cpt = 0;
@@ -194,12 +201,21 @@ public class Fonction {
 				centralMin = centralite;
 				acteurCentralMin.clear();
 				acteurCentralMin.add(cast);
+				System.out.println(acteurCentralMin);
 			} else if (centralite == centralMin){
 				acteurCentralMin.add(cast);
 			}
 
 		}  
 		return acteurCentralMin;
+
+	}
+
+	public static List<String> TrieParDegree(Graph<String, DefaultEdge> g){
+		Set<String> set = g.vertexSet();
+		List<String> nodes = new ArrayList<>(set);
+		Collections.sort(nodes, new ComparatorDegree(g));
+		return nodes;
 
 	}
 

@@ -2,6 +2,8 @@ package org.jgrapht.archetypes;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import org.jgrapht.Graph;
@@ -128,14 +130,23 @@ public class AppTest
     }
 
     @Test
-    public void ActeurAuCentre(){
+    public void TestActeurAuCentre(){
         Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
         getGraph(graph);
 
         Set<String> res1 = Set.of("d", "f");
 
         assertEquals(Fonction.ActeurAuCentre(graph),res1);
+    }
 
+    @Test
+    public void TestTrieParDegree(){
+        Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        getGraph(graph);
+
+        List<String> res1 = Arrays.asList("b", "d", "f", "g", "c", "a", "e", "h", "i");
+
+        assertEquals(Fonction.TrieParDegree(graph),res1);
     }
 
 
