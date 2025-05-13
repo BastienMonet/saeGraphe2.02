@@ -16,6 +16,12 @@ public class Fonction {
 
 
     public static Set<String> getNeighborsOf(Graph<String, DefaultEdge> g, String u){
+		/*
+		 * @param : le graph
+		 * @param : un sommet u
+		 * @return : les voisins de u
+		 * complexité : O(n) avec n = nbre d'arrête
+		 */
 		Set<String> neighbors= new HashSet<>();
 		for(DefaultEdge edge : g.edgesOf(u)){
 			String source = g.getEdgeSource(edge);
@@ -30,6 +36,13 @@ public class Fonction {
 	}
 
 	public static Set<String> getNeighborsNonMemoire(Graph<String, DefaultEdge> g, String u, Set<String> memoire){
+		/*
+		 * @param : le graph
+		 * @param : un sommet u
+		 * @param : memoire
+		 * @return : les voisins de u privé de memoire
+		 * complexité : O(n) avec n = nbre d'arrête
+		 */
 		Set<String> neighbors= new HashSet<>();
 		for(DefaultEdge edge : g.edgesOf(u)){
 			String source = g.getEdgeSource(edge);
@@ -57,6 +70,12 @@ public class Fonction {
 
 
 	public static Set<String> CollaborateursProches(Graph<String, DefaultEdge> g , String acteur, int k){
+		/*
+		 * @param : le graph
+		 * @param : un sommet
+		 * @param : la distance souhaiter
+		 * @return : les voisin situer à au plus k
+		 */
 		Set<String> prev = new HashSet<>();
 		prev.add(acteur);
 		Set<String> new_ = new HashSet<>();
@@ -148,7 +167,7 @@ public class Fonction {
 			k++;
 			new_ = CollaborateursProchesRecursif(g, prev);
 			if (prev.equals(new_)){
-				return k;
+				return k-1;
 			}
 			prev = new HashSet<>(new_);
 		}

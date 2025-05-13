@@ -117,7 +117,6 @@ public class AppTest
     }
 
 
-
     @Test
     public void TestDistanceMax(){
         Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
