@@ -162,12 +162,15 @@ public class Fonction {
 		Set<String> prev = new HashSet<>();
 		prev.add(acteur);
 		Set<String> new_ = new HashSet<>();
-		int k = 0; 
+		Set<String> memoire = new HashSet<>();
+		int k = -2; 
 		while (true){
 			k++;
+			memoire.addAll(prev);
 			new_ = CollaborateursProchesRecursif(g, prev);
+			new_.removeAll(memoire);
 			if (prev.equals(new_)){
-				return k-1;
+				return k;
 			}
 			prev = new HashSet<>(new_);
 		}
