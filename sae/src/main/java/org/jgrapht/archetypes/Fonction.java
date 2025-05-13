@@ -184,12 +184,13 @@ public class Fonction {
 		/*
 		 *  ! ne marche que pour un graphe connexe
 		 */
-		Set<String> lesActeurs = g.vertexSet();
+		List<String> lesActeurs = TrieParDegree(g);
+		if (lesActeurs.size() > 1000){
+			lesActeurs.subList(0, 10);
+		}
 			// .stream()
 			// .sorted((v1, v2) -> Integer.compare(g.degreeOf(v2), g.degreeOf(v1)))
 			// .collect(Collectors.toList());
-		// Collections.sort(lesActeurs, new ComparatorDegree(g));
-		// System.out.println(lesActeurs.get(0));
 		Integer centralMin = null;
 		Set<String> acteurCentralMin = new HashSet<>();
 		int cpt = 0;
@@ -201,7 +202,7 @@ public class Fonction {
 				centralMin = centralite;
 				acteurCentralMin.clear();
 				acteurCentralMin.add(cast);
-				System.out.println(acteurCentralMin);
+				// System.out.println(acteurCentralMin);
 			} else if (centralite == centralMin){
 				acteurCentralMin.add(cast);
 			}

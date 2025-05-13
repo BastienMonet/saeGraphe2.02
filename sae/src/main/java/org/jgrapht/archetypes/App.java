@@ -76,7 +76,7 @@ public class App {
 		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
 		try {
-			Scanner scanner = new Scanner(new File("datamicro.txt"));
+			Scanner scanner = new Scanner(new File("data100.txt"));
 	
 			String res = "";
 			int cpt = 1;
@@ -114,8 +114,10 @@ public class App {
 			}
 
 
+		System.out.println(graph.vertexSet().size());
 
-		List<String> res = Fonction.TrieParDegree(graph);
+
+		Set<String> res = Fonction.ActeurAuCentre(graph);
 		System.out.println(res);
 
 
