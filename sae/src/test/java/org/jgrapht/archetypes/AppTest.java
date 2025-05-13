@@ -102,5 +102,42 @@ public class AppTest
         assertEquals(Fonction.DistanceEntreActeurs(graph, "a", "i"),4);
     }
 
+    @Test
+    public void TestActeurPlusEloigne(){
+        Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        getGraph(graph);
+
+        Set<String> res1 = Set.of("i", "h");
+        Set<String> res2 = Set.of("a");
+        Set<String> res3 = Set.of("i", "h");
+
+        assertEquals(Fonction.ActeurPlusEloigne(graph, "a"),res1);
+        assertEquals(Fonction.ActeurPlusEloigne(graph, "i"),res2);
+        assertEquals(Fonction.ActeurPlusEloigne(graph, "e"),res3);
+    }
+
+
+
+    @Test
+    public void TestDistanceMax(){
+        Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        getGraph(graph);
+
+        assertEquals(Fonction.DistanceMax(graph, "c"),3);
+        assertEquals(Fonction.DistanceMax(graph, "a"),4);
+        assertEquals(Fonction.DistanceMax(graph, "i"),4);
+    }
+
+    @Test
+    public void ActeurAuCentre(){
+        Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        getGraph(graph);
+
+        Set<String> res1 = Set.of("d", "f");
+
+        assertEquals(Fonction.ActeurAuCentre(graph),res1);
+
+    }
+
 
 }
