@@ -17,6 +17,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -31,50 +36,26 @@ import java.util.Set;
 /**
  * Hello JGraphT!
  */
-public class App {
+public class App extends Application {
 
+	private Stage stage;
 
-	public static Graph<String, DefaultEdge> loadHeroes() {
-		Graph<String, DefaultEdge> graph = new DefaultUndirectedGraph<>(SupplierUtil.createStringSupplier(1),
-				SupplierUtil.DEFAULT_EDGE_SUPPLIER, false);
-		CSVImporter<String, DefaultEdge> importer = new CSVImporter<>(CSVFormat.EDGE_LIST);
-		importer.setVertexFactory(id -> id);
-		importer.importGraph(graph, new File("extrait_marvel.csv"));
-		return graph;
+	@Override
+	public void start(Stage stage){
+
+		BorderPane root = new BorderPane();
+
+		Scene scene = new Scene(root);
+
+		View vue = new View();
+
+		stage.setScene(vue.ViewGraph(this));
+		stage.setTitle("test jgrapht");
+		stage.show();
+
 	}
 
-	
-	public static Set<String> nettoyer(List<String> lst){
-		/*
-		 * @param : la liste de nom à nettoyer
-		 * @return : la liste nettoyer (sans [] ou " supplementaire)
-		 */
-		Set<String> cp = new HashSet<>();
-		for(String s : lst){
-			cp.add(s.replaceAll("[\\[\\]\"]",""));
-		}
-		return cp;
-	}
-
-
-	public static void ajouterAuGraph(Graph<String, DefaultEdge> g, Set<String> set) {
-		for (String v : set) {
-			if (! (g.containsVertex(v)))
-				g.addVertex(v);
-		}
-
-		for (String v1 : set) {
-			for (String v2 : set){
-				if(! (g.containsEdge(v1, v2) || g.containsEdge(v2, v1) ) && v1 != v2)
-					g.addEdge(v1, v2);
-			}
-		}
-	}
-	
-	public static void main(String[] args) throws IOException {
-		
-		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
-
+	public static void loadData(Graph<String, DefaultEdge> graph){
 		try {
 			Scanner scanner = new Scanner(new File("data100.txt"));
 	
@@ -120,6 +101,47 @@ public class App {
 		Set<String> res = Fonction.ActeurAuCentre(graph);
 		System.out.println(res);
 
+	}
+
+	
+	public static Set<String> nettoyer(List<String> lst){
+		/*
+		 * @param : la liste de nom à nettoyer
+		 * @return : la liste nettoyer (sans [] ou " supplementaire)
+		 */
+		Set<String> cp = new HashSet<>();
+		for(String s : lst){
+			cp.add(s.replaceAll("[\\[\\]\"]",""));
+		}
+		return cp;
+	}
+
+
+	public static void ajouterAuGraph(Graph<String, DefaultEdge> g, Set<String> set) {
+		for (String v : set) {
+			if (! (g.containsVertex(v)))
+				g.addVertex(v);
+		}
+
+		for (String v1 : set) {
+			for (String v2 : set){
+				if(! (g.containsEdge(v1, v2) || g.containsEdge(v2, v1) ) && v1 != v2)
+					g.addEdge(v1, v2);
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+
+		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+
+		loadData(graph);
+
+		Application.launch(args);
+		
+		
+
+		
 
 
 		// DOTExporter<String, DefaultEdge> exporter = new DOTExporter<String, DefaultEdge>();
