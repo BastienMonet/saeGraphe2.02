@@ -1,5 +1,9 @@
 package org.jgrapht.archetypes;
 
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class View {
-
 
     public Scene ViewGraph(App app){
 
@@ -36,6 +39,14 @@ public class View {
         Label result = new Label();
 
         TextArea setofcast = new TextArea();
+        setofcast.setWrapText(true);
+
+        // ! a ne pas faire cette opperation dans la vue a l'avenir
+        Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+
+		App.loadData(graph);
+
+        setofcast.setText(graph.vertexSet().toString());
 
 
         VBox vb = new VBox(30);

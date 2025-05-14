@@ -133,10 +133,6 @@ public class App extends Application {
 	
 	public static void main(String[] args) throws IOException {
 
-		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
-
-		loadData(graph);
-
 		Application.launch(args);
 		
 		
