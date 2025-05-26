@@ -19,6 +19,7 @@ import com.google.gson.JsonObject;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -36,25 +37,35 @@ import java.util.Set;
 /**
  * Hello JGraphT!
  */
-public class App extends Application {
+public class App { // extends Application {
 
-	private Stage stage;
+	// private Stage stage;
+	// TextField cast1;
+	// TextField cast2;
 
 
-	@Override
-	public void start(Stage stage){
+	// @Override
+	// public void init(){
+	// 	cast1 = new TextField();
 
-		BorderPane root = new BorderPane();
+    //     cast2 = new TextField();
+	// }
 
-		Scene scene = new Scene(root);
 
-		View vue = new View();
+	// @Override
+	// public void start(Stage stage){
 
-		stage.setScene(vue.ViewGraph(this));
-		stage.setTitle("test jgrapht");
-		stage.show();
+	// 	BorderPane root = new BorderPane();
 
-	}
+	// 	Scene scene = new Scene(root);
+
+	// 	View vue = new View();
+
+	// 	stage.setScene(vue.ViewGraph(this));
+	// 	stage.setTitle("test jgrapht");
+	// 	stage.show();
+
+	// }
 
 	public static void loadData(Graph<String, DefaultEdge> graph){
 		try {
@@ -127,16 +138,16 @@ public class App extends Application {
 			}
 		}
 	}
+
+
 	
 	public static void main(String[] args) throws IOException {
 
-		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+		// Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
-		loadData(graph);
+		// loadData(graph);
 
-		System.out.println(Fonction.DistanceMoyen(graph, "i"));
-
-
+		// System.out.println(Fonction.DistanceMoyen(graph, "i"));
 
 		// Application.launch(args);
 		

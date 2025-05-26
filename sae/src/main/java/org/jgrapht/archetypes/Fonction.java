@@ -16,8 +16,7 @@ import org.jgrapht.graph.DefaultEdge;
 
 public class Fonction {
 
-
-    public static Set<String> getNeighborsOf(Graph<String, DefaultEdge> g, String u){
+	public static Set<String> getNeighborsOf(Graph<String, DefaultEdge> g, String u){
 		/*
 		 * @param : le graph
 		 * @param : un sommet u
