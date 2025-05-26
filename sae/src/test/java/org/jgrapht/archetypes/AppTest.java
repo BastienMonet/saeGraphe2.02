@@ -140,6 +140,16 @@ public class AppTest
     }
 
     @Test
+    public void TestPetiteFamille(){
+        Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        getGraph(graph);
+
+        int res = Fonction.PetiteFamille(graph);
+
+        assertEquals(res,4);
+    }
+
+    @Test
     public void TestTrieParDegree(){
         Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
         getGraph(graph);

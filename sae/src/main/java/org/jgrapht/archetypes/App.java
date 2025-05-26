@@ -40,6 +40,7 @@ public class App extends Application {
 
 	private Stage stage;
 
+
 	@Override
 	public void start(Stage stage){
 
@@ -81,7 +82,7 @@ public class App extends Application {
 				// System.out.println(cpt);
 				// System.out.println(nettoyer(caster));
 
-				cpt++;
+				// cpt++;
 				
 
 				Set<String> castPropre = nettoyer(caster);

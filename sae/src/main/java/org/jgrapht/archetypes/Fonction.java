@@ -209,7 +209,29 @@ public class Fonction {
 
 		}  
 		return acteurCentralMin;
+	}
 
+
+	public static Integer PetiteFamille(Graph<String, DefaultEdge> g){
+		/*
+		 *  ! ne marche que pour un graphe connexe
+		 */
+		List<String> lesActeurs = TrieParDegree(g);
+		if (lesActeurs.size() > 1000){
+			lesActeurs.subList(0, 10);
+		}
+		Integer centralMax = null;
+		int cpt = 0;
+		for (String cast : lesActeurs){
+			cpt++;
+			System.out.println(cpt);
+			int centralite = DistanceMax(g, cast);
+			if (centralMax == null || centralite > centralMax){
+				centralMax = centralite;
+				// System.out.println(acteurCentralMin);
+			}
+		}  
+		return centralMax;
 	}
 
 	public static List<String> TrieParDegree(Graph<String, DefaultEdge> g){
