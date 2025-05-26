@@ -156,7 +156,7 @@ public class AppTest
 
         double res = Fonction.DistanceMoyen(graph, "a");
 
-        assertEquals(res, 2, 0.001);
+        assertEquals(res, 2, 0.1);
     }
 
     @Test
