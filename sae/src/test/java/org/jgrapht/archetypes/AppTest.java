@@ -150,6 +150,16 @@ public class AppTest
     }
 
     @Test
+    public void TestDistanceMoyen(){
+        Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+        getGraph(graph);
+
+        double res = Fonction.DistanceMoyen(graph, "a");
+
+        assertEquals(res, 2, 0.001);
+    }
+
+    @Test
     public void TestTrieParDegree(){
         Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
         getGraph(graph);

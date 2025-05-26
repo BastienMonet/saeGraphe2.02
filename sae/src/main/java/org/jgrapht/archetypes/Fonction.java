@@ -234,6 +234,21 @@ public class Fonction {
 		return centralMax;
 	}
 
+
+	public static double DistanceMoyen(Graph<String, DefaultEdge> g, String acteur){
+		int centraliteTot = 0;
+		Set<String> lstActeur = new HashSet<>(g.vertexSet());
+		lstActeur.remove(acteur);
+		for (String cast : lstActeur){
+			 centraliteTot += DistanceEntreActeurs(g, cast, acteur);
+		} 
+		if (centraliteTot != 0){
+			return centraliteTot / g.vertexSet().size();
+		} else {
+			return 0;
+		}
+	}
+
 	public static List<String> TrieParDegree(Graph<String, DefaultEdge> g){
 		Set<String> set = g.vertexSet();
 		List<String> nodes = new ArrayList<>(set);
