@@ -154,9 +154,9 @@ public class AppTest
         Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
         getGraph(graph);
 
-        double res = Fonction.DistanceMoyen(graph, "a");
+        double res = Fonction.DistanceMoyen(graph, "i");
 
-        assertEquals(res, 2, 0.1);
+        assertEquals(res, 2.375, 0.1);
     }
 
     @Test

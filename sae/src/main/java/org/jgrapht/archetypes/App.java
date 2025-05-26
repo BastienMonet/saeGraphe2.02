@@ -58,7 +58,7 @@ public class App extends Application {
 
 	public static void loadData(Graph<String, DefaultEdge> graph){
 		try {
-			Scanner scanner = new Scanner(new File("data100.txt"));
+			Scanner scanner = new Scanner(new File("datamicro.txt"));
 	
 			String res = "";
 			int cpt = 1;
@@ -96,11 +96,7 @@ public class App extends Application {
 			}
 
 
-		System.out.println(graph.vertexSet().size());
-
-
-		Set<String> res = Fonction.ActeurAuCentre(graph);
-		System.out.println(res);
+		// System.out.println(graph.vertexSet().size());
 
 	}
 
@@ -134,12 +130,16 @@ public class App extends Application {
 	
 	public static void main(String[] args) throws IOException {
 
-		Application.launch(args);
-		
-		
+		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
-		
+		loadData(graph);
 
+		System.out.println(Fonction.DistanceMoyen(graph, "i"));
+
+
+
+		// Application.launch(args);
+		
 
 		// DOTExporter<String, DefaultEdge> exporter = new DOTExporter<String, DefaultEdge>();
 		// exporter.setVertexAttributeProvider((x) -> Map.of("label", new DefaultAttribute<>(x, AttributeType.STRING)));

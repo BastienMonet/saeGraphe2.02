@@ -129,8 +129,8 @@ public class Fonction {
 			} else if (prev.equals(new_)){
 				return -1;
 			}
-			System.out.println(prev);
-			System.out.println(new_);
+			// System.out.println(prev);
+			// System.out.println(new_);
 			prev = new HashSet<>(new_);
 
 		}
@@ -236,14 +236,15 @@ public class Fonction {
 
 
 	public static double DistanceMoyen(Graph<String, DefaultEdge> g, String acteur){
-		int centraliteTot = 0;
+		double centraliteTot = 0.0;
 		Set<String> lstActeur = new HashSet<>(g.vertexSet());
 		lstActeur.remove(acteur);
 		for (String cast : lstActeur){
+			// System.out.println(DistanceEntreActeurs(g, cast, acteur));
 			 centraliteTot += DistanceEntreActeurs(g, cast, acteur);
 		} 
 		if (centraliteTot != 0){
-			return centraliteTot / g.vertexSet().size();
+			return centraliteTot / (g.vertexSet().size()-1);
 		} else {
 			return 0;
 		}
