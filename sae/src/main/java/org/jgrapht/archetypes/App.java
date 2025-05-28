@@ -18,9 +18,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -37,35 +43,71 @@ import java.util.Set;
 /**
  * Hello JGraphT!
  */
-public class App { // extends Application {
+public class App extends Application {
 
-	// private Stage stage;
-	// TextField cast1;
-	// TextField cast2;
-
-
-	// @Override
-	// public void init(){
-	// 	cast1 = new TextField();
-
-    //     cast2 = new TextField();
-	// }
+	TextField cast1;
+	TextField cast2;
+	Label result;
+	Graph<String, DefaultEdge> graph;
 
 
-	// @Override
-	// public void start(Stage stage){
+	@Override
+	public void init(){
+		graph = new SimpleGraph<>(DefaultEdge.class);
+		loadData(graph);
+		cast1 = new TextField();
+        cast2 = new TextField();
+		result = new Label();
 
-	// 	BorderPane root = new BorderPane();
+	}
 
-	// 	Scene scene = new Scene(root);
 
-	// 	View vue = new View();
+	@Override
+	public void start(Stage stage){
 
-	// 	stage.setScene(vue.ViewGraph(this));
-	// 	stage.setTitle("test jgrapht");
-	// 	stage.show();
+		 Label welcome = new Label("Bienvenue dans l'appli jgrapht selectionner l'action de votre choix (certain choix nessesite de rentrer le nom d'acteur à étudier)");
 
-	// }
+        HBox hb1 = new HBox(20);
+
+        hb1.getChildren().addAll(this.cast1, this.cast2);
+        hb1.setAlignment(Pos.CENTER);
+
+        VBox hb2 = new VBox(20);
+
+        Button btn1 = new Button("f°1");
+		btn1.setOnAction(new ControlleurBouton(this, graph));
+
+        hb2.getChildren().addAll(btn1);
+        hb2.setAlignment(Pos.CENTER);
+
+        TextArea setofcast = new TextArea();
+        setofcast.setWrapText(true);
+
+        setofcast.setText(graph.vertexSet().toString());
+
+
+        VBox vb = new VBox(30);
+
+        vb.getChildren().addAll(welcome, hb1, hb2, this.result, setofcast);
+        vb.setAlignment(Pos.CENTER);
+
+        BorderPane root = new BorderPane();
+
+        root.setCenter(vb);
+
+		Scene scene = new Scene(root, 500, 500);
+		
+		
+		stage.setScene(scene); 
+		stage.setTitle("test jgrapht");
+		stage.show();
+
+	}
+
+
+	public String getCast1() {
+		return cast1.getText();
+	}
 
 	public static void loadData(Graph<String, DefaultEdge> graph){
 		try {
@@ -147,9 +189,10 @@ public class App { // extends Application {
 
 		// loadData(graph);
 
-		// System.out.println(Fonction.DistanceMoyen(graph, "i"));
 
-		// Application.launch(args);
+		Application.launch(args);
+
+		// System.out.println(Fonction.DistanceMoyen(graph, "i"));
 		
 
 		// DOTExporter<String, DefaultEdge> exporter = new DOTExporter<String, DefaultEdge>();
