@@ -23,14 +23,41 @@ public class ControlleurBouton implements EventHandler<ActionEvent> {
     public void handle(ActionEvent arg0) {
         Button btn = (Button) arg0.getSource();
         String nom = btn.getText();
+        String cast1 = app.getCast1();
+        String cast2 = app.getCast2();
         switch (nom) {
-            case ("f°1"):
-                String cast = app.getCast1();
-                System.out.println(cast);
-                if (cast != "" && g.vertexSet().contains(cast)){
-                    app.result.setText(Fonction.getNeighborsOf(g, cast).toString());
+            case ("les voisins"):
+                if (g.vertexSet().contains(cast1)){
+                    app.result.setText(Fonction.getNeighborsOf(g, cast1).toString());
                 }
                 break;
+            case ("collaborateur commun"):
+                if (g.vertexSet().contains(cast1) && g.vertexSet().contains(cast2)){
+                    app.result.setText(Fonction.CollaborateursEnCommuns(g, cast1, cast2).toString());
+                }
+                break;
+            case ("distance entre acteurs"):
+                if (g.vertexSet().contains(cast1) && g.vertexSet().contains(cast2)){
+                    Integer res1 = Fonction.DistanceEntreActeurs(g, cast1, cast2);
+                    app.result.setText(res1.toString());
+                }
+                break;
+            case ("acteur le plus eloigne"):
+                if (g.vertexSet().contains(cast1)){
+                    app.result.setText(Fonction.ActeurPlusEloigne(g, cast1).toString());
+                }
+                break;
+            case ("acteur au centre"):
+                app.result.setText(Fonction.ActeurAuCentre(g).toString());
+                 break;
+
+            case ("distence moyen"):
+                if (g.vertexSet().contains(cast1)){
+                    Double res2 = Fonction.DistanceMoyen(g, cast1);
+                    app.result.setText(res2.toString());
+                }
+                break;
+            
 
         }
     }

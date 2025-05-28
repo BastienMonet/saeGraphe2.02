@@ -18,6 +18,18 @@ public class Fonction {
 
 	private Fonction() {};
 
+	public static boolean isNumber(String str) {
+    if (str == null || str.isEmpty()) {
+        return false;
+    }
+    try {
+        Double.parseDouble(str);
+        return true;
+    } catch (NumberFormatException e) {
+        return false;
+    }
+}
+
 	public static Set<String> getNeighborsOf(Graph<String, DefaultEdge> g, String u){
 		/*
 		 * @param : le graph
@@ -197,7 +209,7 @@ public class Fonction {
 		int cpt = 0;
 		for (String cast : lesActeurs){
 			cpt++;
-			System.out.println(cpt);
+			// System.out.println(cpt);
 			int centralite = DistanceMax(g, cast);
 			if (centralMin == null || centralite < centralMin){
 				centralMin = centralite;

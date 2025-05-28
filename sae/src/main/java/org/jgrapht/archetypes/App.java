@@ -74,10 +74,22 @@ public class App extends Application {
 
         VBox hb2 = new VBox(20);
 
-        Button btn1 = new Button("f°1");
-		btn1.setOnAction(new ControlleurBouton(this, graph));
+        Button btn1 = new Button("les voisins");
+		Button btn2 = new Button("collaborateur commun");
+		Button btn3 = new Button("distance entre acteurs");
+		Button btn4 = new Button("acteur le plus eloigne");
+		Button btn5 = new Button("acteur au centre");
+		Button btn6 = new Button("distence moyen");
 
-        hb2.getChildren().addAll(btn1);
+		ControlleurBouton control = new ControlleurBouton(this, graph);
+		btn1.setOnAction(control);
+		btn2.setOnAction(control);
+		btn3.setOnAction(control);
+		btn4.setOnAction(control);
+		btn5.setOnAction(control);
+		btn6.setOnAction(control);
+
+        hb2.getChildren().addAll(btn1, btn2, btn3, btn4, btn5, btn6);
         hb2.setAlignment(Pos.CENTER);
 
         TextArea setofcast = new TextArea();
@@ -95,7 +107,7 @@ public class App extends Application {
 
         root.setCenter(vb);
 
-		Scene scene = new Scene(root, 500, 500);
+		Scene scene = new Scene(root, 700, 700);
 		
 		
 		stage.setScene(scene); 
@@ -107,6 +119,10 @@ public class App extends Application {
 
 	public String getCast1() {
 		return cast1.getText();
+	}
+
+	public String getCast2() {
+		return cast2.getText();
 	}
 
 	public static void loadData(Graph<String, DefaultEdge> graph){
