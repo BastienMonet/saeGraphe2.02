@@ -24,9 +24,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -39,6 +42,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+
+import javax.tools.Tool;
 
 /**
  * Hello JGraphT!
@@ -65,7 +70,12 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage){
 
-		 Label welcome = new Label("Bienvenue dans l'appli jgrapht selectionner l'action de votre choix (certain choix nessesite de rentrer le nom d'acteur à étudier)");
+		Text welcome = new Text("Bienvenue dans l'appli jgrapht selectionner l'action de votre choix (certain choix nessesite de rentrer le nom des acteur à étudier)");
+
+		welcome.setStyle("-fx-font-size: 18px; -fx-font-family: cursive;");
+		welcome.setTextAlignment(TextAlignment.CENTER);	
+
+		welcome.setWrappingWidth(250);
 
         HBox hb1 = new HBox(20);
 
@@ -74,12 +84,21 @@ public class App extends Application {
 
         VBox hb2 = new VBox(20);
 
+		Tooltip t1 = new Tooltip("compléter le 1er champs de texte avec l'acteur a étudier");
+		Tooltip t2 = new Tooltip("compléter les 2 champs de texte avec les acteurs étudiés");
+
         Button btn1 = new Button("les voisins");
 		Button btn2 = new Button("collaborateur commun");
 		Button btn3 = new Button("distance entre acteurs");
-		Button btn4 = new Button("acteur le plus eloigne");
+		Button btn4 = new Button("acteur le plus éloigné");
 		Button btn5 = new Button("acteur au centre");
-		Button btn6 = new Button("distence moyen");
+		Button btn6 = new Button("distance moyen");
+
+		Tooltip.install(btn1, t1);
+		Tooltip.install(btn2, t2);
+		Tooltip.install(btn3, t2);
+		Tooltip.install(btn4, t1);
+		Tooltip.install(btn6, t1);
 
 		ControlleurBouton control = new ControlleurBouton(this, graph);
 		btn1.setOnAction(control);

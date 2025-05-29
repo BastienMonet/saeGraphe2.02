@@ -42,16 +42,16 @@ public class ControlleurBouton implements EventHandler<ActionEvent> {
                     app.result.setText(res1.toString());
                 }
                 break;
-            case ("acteur le plus eloigne"):
+            case ("acteur le plus éloigné"):
                 if (g.vertexSet().contains(cast1)){
                     app.result.setText(Fonction.ActeurPlusEloigne(g, cast1).toString());
                 }
                 break;
             case ("acteur au centre"):
                 app.result.setText(Fonction.ActeurAuCentre(g).toString());
-                 break;
+                break;
 
-            case ("distence moyen"):
+            case ("distance moyen"):
                 if (g.vertexSet().contains(cast1)){
                     Double res2 = Fonction.DistanceMoyen(g, cast1);
                     app.result.setText(res2.toString());

@@ -90,6 +90,7 @@ public class Fonction {
 		 * @param : un sommet
 		 * @param : la distance souhaiter
 		 * @return : les voisin situer à au plus k
+		 * complexite : O(k * n) avec k la distance mise en paramètre et n le nombre d'arrète dans le graphe 
 		 */
 		Set<String> prev = new HashSet<>();
 		prev.add(acteur);
@@ -110,6 +111,12 @@ public class Fonction {
 	}
 
 	public static Set<String> CollaborateursProchesRecursif(Graph<String, DefaultEdge> g , Set<String> prev){
+		/*
+		 * @param : le graph
+		 * @param : un ensemble de sommet
+		 * @return : les voisins situer à au plus k
+		 * * complexite : O(n) avec n le nombre d'arrète dans le graphe 
+		 */
 		Set<String> new_ = new HashSet<>();
 		new_.clear();
 		for (String u : prev){
@@ -120,6 +127,13 @@ public class Fonction {
 
 
 	public static boolean EstADistanceK(Graph<String, DefaultEdge> g , String acteur1, String acteur2, int k){
+		/*
+		 * @param : le graph
+		 * @param : un acteur 1
+		 * @param : un acteur 2
+		 * @return : les voisin situer à au plus k
+		 * * complexite : celle de collaborateur proche soit O(n²)
+		 */
 		List<String> lst = new ArrayList<>(CollaborateursProches(g, acteur1, k));
 		return lst.contains(acteur2);
 	}
@@ -153,6 +167,7 @@ public class Fonction {
 
 
 	public static Set<String> ActeurPlusEloigne(Graph<String, DefaultEdge> g, String acteur){
+		// * * complexite : O(n²)
 		if (!(g.containsVertex(acteur)))
 			return null;
 		Set<String> memoire = new HashSet<>();
@@ -172,6 +187,7 @@ public class Fonction {
 
 
 	public static int DistanceMax(Graph<String, DefaultEdge> g, String acteur){
+		// * * complexite : O(n²)
 		if (!(g.containsVertex(acteur)))
 			return -1;
 		Set<String> prev = new HashSet<>();
@@ -196,6 +212,7 @@ public class Fonction {
 	public static Set<String> ActeurAuCentre(Graph<String, DefaultEdge> g){
 		/*
 		 *  ! ne marche que pour un graphe connexe
+		 * 		     complexite : O(n^3)
 		 */
 		List<String> lesActeurs = TrieParDegree(g);
 		if (lesActeurs.size() > 1000){
@@ -228,6 +245,10 @@ public class Fonction {
 	public static Integer PetiteFamille(Graph<String, DefaultEdge> g){
 		/*
 		 *  ! ne marche que pour un graphe connexe
+		 * =======================================
+		 *        oui le max est bien a 9
+		 * =======================================
+		 * 			complexite : O(n^3)
 		 */
 		List<String> lesActeurs = TrieParDegree(g);
 		if (lesActeurs.size() > 1000){
@@ -249,6 +270,7 @@ public class Fonction {
 
 
 	public static double DistanceMoyen(Graph<String, DefaultEdge> g, String acteur){
+		// complexite : O(n^3)
 		double centraliteTot = 0.0;
 		Set<String> lstActeur = new HashSet<>(g.vertexSet());
 		lstActeur.remove(acteur);
