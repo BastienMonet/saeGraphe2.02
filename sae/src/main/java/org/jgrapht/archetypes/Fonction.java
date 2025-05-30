@@ -215,7 +215,7 @@ public class Fonction {
 		 * 		     complexite : O(n^3)
 		 */
 		List<String> lesActeurs = TrieParDegree(g);
-		if (lesActeurs.size() > 1000){
+		if (lesActeurs.size() > 10000){
 			lesActeurs.subList(0, 10);
 		}
 			// .stream()
@@ -251,7 +251,7 @@ public class Fonction {
 		 * 			complexite : O(n^3)
 		 */
 		List<String> lesActeurs = TrieParDegree(g);
-		if (lesActeurs.size() > 1000){
+		if (lesActeurs.size() > 10000){
 			lesActeurs.subList(0, 10);
 		}
 		Integer centralMax = null;
