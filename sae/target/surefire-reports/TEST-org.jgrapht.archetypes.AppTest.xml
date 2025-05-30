@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="org.jgrapht.archetypes.AppTest" time="0.023" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="org.jgrapht.archetypes.AppTest" time="0.03" errors="0" skipped="0">
   <properties>
     <property name="jansi.mode" value="force"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -43,7 +43,7 @@
     <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
     <property name="java.vm.specification.version" value="21"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean package"/>
     <property name="java.home" value="/usr/lib/jvm/java-21-openjdk-amd64"/>
     <property name="user.language" value="fr"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -58,12 +58,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestActeurAuCentre" time="0.019"/>
-  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestActeurPlusEloigne" time="0"/>
+  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestPetiteFamille" time="0.02"/>
+  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestActeurAuCentre" time="0.001"/>
+  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestActeurPlusEloigne" time="0.002"/>
   <testcase classname="org.jgrapht.archetypes.AppTest" name="TestTrieParDegree" time="0"/>
   <testcase classname="org.jgrapht.archetypes.AppTest" name="CollaborateursProches" time="0.001"/>
-  <testcase classname="org.jgrapht.archetypes.AppTest" name="TesCollaborateurEnCommuns" time="0"/>
-  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestDistanceEntreActeurs" time="0.003"/>
-  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestNeighbors" time="0"/>
-  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestDistanceMax" time="0"/>
+  <testcase classname="org.jgrapht.archetypes.AppTest" name="TesCollaborateurEnCommuns" time="0.001"/>
+  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestDistanceMoyen" time="0.002"/>
+  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestDistanceEntreActeurs" time="0.001"/>
+  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestNeighbors" time="0.001"/>
+  <testcase classname="org.jgrapht.archetypes.AppTest" name="TestDistanceMax" time="0.001"/>
 </testsuite>
