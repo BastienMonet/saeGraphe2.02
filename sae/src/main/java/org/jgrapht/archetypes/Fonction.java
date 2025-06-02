@@ -159,8 +159,6 @@ public class Fonction {
 			}	
 			if (new_.contains(acteur2)){
 				fini = true;
-			} else if (prev.equals(new_)){
-				return 0;
 			} else if (new_.isEmpty()){
 				return 0;
 			}
