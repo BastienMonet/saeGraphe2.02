@@ -1,4 +1,4 @@
 org/jgrapht/archetypes/App.class
 org/jgrapht/archetypes/ComparatorDegree.class
-org/jgrapht/archetypes/Fonction.class
 org/jgrapht/archetypes/ControlleurBouton.class
+org/jgrapht/archetypes/Fonction.class

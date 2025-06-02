@@ -54,6 +54,7 @@ public class ControlleurBouton implements EventHandler<ActionEvent> {
             case ("distance moyen"):
                 if (g.vertexSet().contains(cast1)){
                     Double res2 = Fonction.DistanceMoyen(g, cast1);
+                    System.out.println(res2);
                     app.result.setText(res2.toString());
                 }
                 break;

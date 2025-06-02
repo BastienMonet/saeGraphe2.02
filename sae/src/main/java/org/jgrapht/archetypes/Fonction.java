@@ -143,7 +143,7 @@ public class Fonction {
 		 * complexité : O(N²)
 		 */
 		if (!(g.containsVertex(acteur1)) || !(g.containsVertex(acteur2)))
-			return -1;
+			return 0;
 		Set<String> prev = new HashSet<>();
 		prev.add(acteur1);
 		boolean fini = false;
@@ -154,7 +154,7 @@ public class Fonction {
 			if (new_.contains(acteur2)){
 				fini = true;
 			} else if (prev.equals(new_)){
-				return -1;
+				return 0;
 			}
 			// System.out.println(prev);
 			// System.out.println(new_);
@@ -274,9 +274,10 @@ public class Fonction {
 		double centraliteTot = 0.0;
 		Set<String> lstActeur = new HashSet<>(g.vertexSet());
 		lstActeur.remove(acteur);
+		int cpt = 0;
 		for (String cast : lstActeur){
 			// System.out.println(DistanceEntreActeurs(g, cast, acteur));
-			 centraliteTot += DistanceEntreActeurs(g, cast, acteur);
+			centraliteTot += DistanceEntreActeurs(g, cast, acteur);
 		} 
 		if (centraliteTot != 0){
 			return centraliteTot / (g.vertexSet().size()-1);

@@ -146,7 +146,7 @@ public class App extends Application {
 
 	public static void loadData(Graph<String, DefaultEdge> graph){
 		try {
-			Scanner scanner = new Scanner(new File("datamicro.txt"));
+			Scanner scanner = new Scanner(new File("data100.txt"));
 	
 			String res = "";
 			int cpt = 1;
@@ -220,14 +220,14 @@ public class App extends Application {
 	
 	public static void main(String[] args) throws IOException {
 
-		// Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+		Graph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 
-		// loadData(graph);
+		loadData(graph);
 
 
-		Application.launch(args);
+		// Application.launch(args);
 
-		// System.out.println(Fonction.DistanceMoyen(graph, "i"));
+		System.out.println(Fonction.DistanceMoyen(graph, "Harrison Ford"));
 		
 
 		// DOTExporter<String, DefaultEdge> exporter = new DOTExporter<String, DefaultEdge>();
