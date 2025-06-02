@@ -143,21 +143,30 @@ public class Fonction {
 		 * complexité : O(N²)
 		 */
 		if (!(g.containsVertex(acteur1)) || !(g.containsVertex(acteur2)))
-			return 0;
+			return -1;
+		Set<String> memoire = new HashSet<>();
 		Set<String> prev = new HashSet<>();
+		Set<String> new_ = new HashSet<>();
 		prev.add(acteur1);
 		boolean fini = false;
 		int k = 0;
+		int cpt = 0;
 		while (!(fini)){
 			k++;
-			Set<String> new_ = CollaborateursProchesRecursif(g, prev);
+			new_.clear();
+			for (String u : prev){
+				new_.addAll(getNeighborsNonMemoire(g, u, memoire));
+			}	
 			if (new_.contains(acteur2)){
 				fini = true;
 			} else if (prev.equals(new_)){
 				return 0;
+			} else if (new_.isEmpty()){
+				return 0;
 			}
 			// System.out.println(prev);
 			// System.out.println(new_);
+			memoire.addAll(prev);
 			prev = new HashSet<>(new_);
 
 		}
@@ -274,13 +283,17 @@ public class Fonction {
 		double centraliteTot = 0.0;
 		Set<String> lstActeur = new HashSet<>(g.vertexSet());
 		lstActeur.remove(acteur);
-		int cpt = 0;
+		int cpt = 0; 
 		for (String cast : lstActeur){
 			// System.out.println(DistanceEntreActeurs(g, cast, acteur));
-			centraliteTot += DistanceEntreActeurs(g, cast, acteur);
+			double res = DistanceEntreActeurs(g, cast, acteur);
+			centraliteTot += res;
+			if (res == 0){
+				cpt--;
+			}
 		} 
 		if (centraliteTot != 0){
-			return centraliteTot / (g.vertexSet().size()-1);
+			return centraliteTot / (g.vertexSet().size()-1 + cpt);
 		} else {
 			return 0;
 		}
