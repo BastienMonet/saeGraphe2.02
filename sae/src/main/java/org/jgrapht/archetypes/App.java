@@ -146,7 +146,7 @@ public class App extends Application {
 
 	public static void loadData(Graph<String, DefaultEdge> graph){
 		try {
-			Scanner scanner = new Scanner(new File("data100.txt"));
+			Scanner scanner = new Scanner(new File("datamicro.txt"));
 	
 			String res = "";
 			int cpt = 1;
